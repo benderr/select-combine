@@ -6,7 +6,7 @@
   "module": "./src",
   "scripts": {
     "build": "babel ./src --out-dir ./lib",
-    "dev": "webpack-dev-server --inline --content-base --env.dev",
+    "start": "webpack-dev-server --inline --content-base --env.dev",
     "setup": "npm install && npm run validate",
     "git-pub": "git commit -am 'fix' && git push && npm run build && npm publish",
     "lint": "jshint ./src",

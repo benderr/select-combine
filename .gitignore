@@ -15,6 +15,7 @@ demo/coverage
 
 # production
 demo/build
+/build
 
 # misc
 .DS_Store

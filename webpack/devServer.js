@@ -2,6 +2,15 @@ const config = require('../webpack/constants')
 
 const devServer = {
     contentBase: config.IS_PRODUCTION ? config.buildPath : config.sourcePath,
+    historyApiFallback: {
+        rewrites: [
+            //{ from: /^\/$/, to: '/index.html' },
+            // { from: /^\/signin/, to: '/signin.html' },
+            // { from: /^\/registration/, to: '/signin.html' },
+            // { from: /^\/forgot/, to: '/signin.html' },
+            { from: /./, to: '/index.html' }
+        ]
+    },
     port: config.app.port,
     compress: config.IS_PRODUCTION,
     inline: !config.IS_PRODUCTION,

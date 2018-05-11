@@ -1,8 +1,9 @@
 //import 'babel-polyfill';
 import React from 'react'
-import ReactDOM from 'react-dom'
-import Page from './Page'
+import {render} from 'react-dom'
+//import Page from './Page'
+import {AppRedux} from '../src/AppRedux'
 
 require(__STYLES__);
 
-ReactDOM.render((<Page/>), document.getElementById('container'));
+render((<AppRedux/>), document.getElementById('container'));

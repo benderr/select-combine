@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class Page extends Component {
     constructor(props) {
         super(props);
-        this.state = {test: 'Hello'};
+        this.state = {test: 'Hello 1'};
 
     }
 

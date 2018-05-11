@@ -1,6 +1,5 @@
 /*eslint-disable*/
 const webpack = require('webpack');
-/* eslint-enable */
 const config = require('./webpack/constants')
 const plugins = require('./webpack/plugins')
 const rules = require('./webpack/rules')
@@ -40,4 +39,4 @@ module.exports = {
     },
     plugins,
     devServer
-}
+};

@@ -1,6 +1,7 @@
 import {initialState, actionHandlers} from "./reducers";
 import {getRoutes} from "./routes";
 import {ApplicationModule} from "../ApplicationModule";
+import {sagas} from "./sagas";
 
 class CounterModule extends ApplicationModule {
     /**
@@ -8,7 +9,7 @@ class CounterModule extends ApplicationModule {
      */
     getReducers(createReducer) {
         return {
-            counter: createReducer(initialState, actionHandlers),
+            currency: createReducer(initialState, actionHandlers),
         };
     }
 
@@ -18,6 +19,21 @@ class CounterModule extends ApplicationModule {
     getRoutes() {
         return getRoutes();
     }
+
+    /**
+     * @override
+     */
+    getSagas() {
+        return sagas();
+    }
 }
 
 export default new CounterModule;
+
+// export function getSagas() {
+//     return [
+//         sagas(),
+//         regKKTSaga(),
+//         overdraftSaga()
+//     ];
+// }

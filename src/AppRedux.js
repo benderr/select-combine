@@ -7,9 +7,10 @@ import DefaultLayerLayout from './common/components/DefaultLayerLayout';
 import ModulRouter from 'modul-ui-router';
 import {configureRedux} from '../src/redux';
 import CounterModule from './modules/counter/CounterModule';
+import CurrencyModule from './modules/currency/CurrencyModule';
 import {Router} from 'react-router-dom';
 
-const modules = [CounterModule];
+const modules = [CounterModule, CurrencyModule];
 const {store, routes, history} = configureRedux({modules, initState: {}});
 
 

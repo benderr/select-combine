@@ -259,7 +259,7 @@
     // http://eslint.org/docs/rules/no-new-object
     "no-spaced-func": 2,
     // http://eslint.org/docs/rules/no-spaced-func
-    "no-trailing-spaces": 2,
+    //    "no-trailing-spaces": 2,
     // http://eslint.org/docs/rules/no-trailing-spaces
     "no-extra-parens": [
       2,
@@ -273,10 +273,10 @@
       "never"
     ],
     // http://eslint.org/docs/rules/one-var
-//    "padded-blocks": [
-//      2,
-//      "never"
-//    ],
+    //    "padded-blocks": [
+    //      2,
+    //      "never"
+    //    ],
     // http://eslint.org/docs/rules/padded-blocks
     //    "semi": [
     //      2,
@@ -342,7 +342,10 @@
     "react/self-closing-comp": 2,
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md
     "react/wrap-multilines": 2,
-    "generator-star-spacing": ["error", "after"],
+    "generator-star-spacing": [
+      "error",
+      "after"
+    ],
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md
     "react/sort-comp": [
       2,

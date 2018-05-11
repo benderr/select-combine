@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom'
 
 /**
  * Dump component
@@ -15,9 +16,16 @@ class Counter extends React.Component {
         const {number} = this.props;
         return (
             <div>
-                <span>{number}</span>
-                <button className="button" onClick={this.handleIncrement}>+</button>
-                <button className="button" onClick={this.handleDecrement}>-</button>
+                <div>
+                    <span className="info info_success">{number}</span>
+                </div>
+                <div className="form-buttons">
+                    <button className="button small" onClick={this.handleIncrement}>+</button>
+                    <button className="button small" onClick={this.handleDecrement}>-</button>
+                </div>
+                <div>
+                    <Link to="/currency">Go to currency</Link>
+                </div>
             </div>
         );
     }

@@ -1,17 +1,28 @@
-import {INCREMENT, DECREMENT} from "./actions";
+import {LOADING_CURRENCY_RATE, SET_RATE_FAIL, SET_RATE_SUCCESS} from "./actions";
 
 export const initialState = {
-    number: 0,
+    rate: null,
+    loading: false,
+    error: null,
+    pair: null,
 };
 
 export const actionHandlers = {
-    // проверка изменения статуса у всех торг.точек
-    [INCREMENT]: (state) => {
-        return {...state, number: state.number + 1};
+
+    [LOADING_CURRENCY_RATE]: (state, {payload: {loading}}) => {
+        return {...state, loading: loading, error: null};
     },
 
-    // при закрытии слоя регистрации ККТ
-    [DECREMENT]: (state) => {
-        return {...state, number: state.number - 1};
+    [SET_RATE_SUCCESS]: (state, action) => {
+        return {
+            ...state,
+            rate: action.payload.rate,
+            pair: action.payload.currencyPair,
+            error: null,
+        };
+    },
+
+    [SET_RATE_FAIL]: (state, {payload: {error}}) => {
+        return {...state, error: error}
     },
 };

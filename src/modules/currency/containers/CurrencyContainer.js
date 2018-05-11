@@ -1,44 +1,57 @@
 import React from 'react';
 import {connect} from 'react-redux';
-//import {bindActionCreators} from 'redux';
-//import {increment, decrement} from "../actions";
+import {bindActionCreators} from 'redux';
+import {fetchCurrencyRate} from "../actions";
 import {CurrencyView} from "../components/CurrencyView";
-//import PropTypes from "prop-types";
+
+import PropTypes from "prop-types";
 
 @connect(mapState, mapDispatch)
 class CurrencyContainer extends React.Component {
+
+    static propTypes = {
+        rate: PropTypes.number,
+        error: PropTypes.string,
+        loading: PropTypes.bool,
+        pair: PropTypes.string,
+        fetchRate: PropTypes.func.isRequired,
+    };
+
     render() {
-        //const {number, incrementAction, decrementAction} = this.props;
+        const {rate, error, loading, pair} = this.props;
         return (
             <div className="main">
                 <div className="widget_block">
-                    <CurrencyView loading={false}
-                                  update={() => {
-                                      console.log('updating');
-                                  }}
-                                  pair="EUR_USD"
-                                  value={1.192176}/>
+                    <CurrencyView loading={loading}
+                                  update={this.handleSelectCurrencyPair}
+                                  pair={pair}
+                                  error={error}
+                                  rate={rate}/>
                 </div>
             </div>
         );
     }
+
+    handleSelectCurrencyPair = ({currencyPair}) => {
+        this.props.fetchRate({currencyPair});
+    }
 }
 
 function mapState(state) {
-    // return {
-    //     number: state.counter.number,
-    // };
-    return {};
+    return {
+        rate: state.currency.rate,
+        error: state.currency.error,
+        loading: state.currency.loading,
+        pair: state.currency.pair,
+    };
 }
 
 function mapDispatch(dispatch) {
-    // return {
-    //     ...bindActionCreators({
-    //         incrementAction: increment,
-    //         decrementAction: decrement,
-    //     }, dispatch),
-    // };
-    return {};
+    return {
+        ...bindActionCreators({
+            fetchRate: fetchCurrencyRate,
+        }, dispatch),
+    };
 }
 
 

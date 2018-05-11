@@ -5,5 +5,9 @@
  * @returns {{type: *}}
  */
 export function createAction(type, payload = {}) {
-    return {type, payload: payload};
+    return {type, payload};
+}
+
+export function createEffect(type, meta = {}) {
+    return {type, meta};
 }

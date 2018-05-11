@@ -16,10 +16,8 @@ class Counter extends React.Component {
         const {number} = this.props;
         return (
             <div>
-                <div>
-                    <span className="info info_success">{number}</span>
-                </div>
                 <div className="form-buttons">
+                    <span className="info info_success">{number}</span>
                     <button className="button small" onClick={this.handleIncrement}>+</button>
                     <button className="button small" onClick={this.handleDecrement}>-</button>
                 </div>

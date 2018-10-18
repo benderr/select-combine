@@ -4,6 +4,7 @@ import {render} from 'react-dom'
 //import Page from './Page'
 import {AppRedux} from '../src/AppRedux'
 
-require(__STYLES__);
+import 'markup-common/markup/stylus/buttons.styl'
+import 'markup-common/markup/stylus/blocks.styl'
 
 render((<AppRedux/>), document.getElementById('container'));

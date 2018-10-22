@@ -68,7 +68,7 @@ class DefaultLayerLayout extends React.Component {
 
 	getToggleButton() {
 		return (<a id={'page_expand_' + this.props.layerId} className="page_expand icon-fullsize"
-				   onClick={::this.toggleFullSize}></a>);
+			onClick={::this.toggleFullSize}></a>);
 	}
 
 	getElement() {

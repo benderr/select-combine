@@ -1,33 +1,65 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const config = require('../webpack/constants')
+const config = require('config');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const isDevMode = config.get('build.mode') === 'development';
+const babelOptions = require('../babel/setup');
 
 const rules = [
     {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [
-            'babel-loader'
+            {
+                loader: 'babel-loader',
+                options: Object.assign({
+                    cacheDirectory: true,
+                }, babelOptions({ jest: true })),
+            },
+        ],
+    },
+    {
+        test: /\.(png|jpg|gif|ico|svg)$/,
+        use: [
+            {
+                loader: 'file-loader',
+            },
         ]
     },
     {
-        test: /\.(png|gif|jpg|svg|woff|woff2|eot|ttf|ico)$/,
-        use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]'
-    }
-]
-
-if (config.IS_PRODUCTION) {
-    rules.push({
+        test: /\.(woff|woff2|eot|ttf)$/,
+        use: [
+            {
+                loader: 'file-loader',
+                options: {
+                    name: 'fonts/[name].[hash:hex:7].[ext]',
+                },
+            },
+        ],
+    },
+    {
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: 'css-loader!stylus-loader?resolve url'
-        })
-    })
-} else {
-    rules.push({
-        test: /\.styl$/,
-        loader: 'style-loader!css-loader!stylus-loader?resolve url'
-    })
-}
+        use: [
+            isDevMode ? {
+                loader: 'style-loader',
+                options: {
+                    attrs: { 'data-style-loader': true }
+                }
+            } : MiniCssExtractPlugin.loader,
+            {
+                loader: 'css-loader',
+                options: {
+                    sourceMap: isDevMode
+                }
+            },
+            {
+                loader: 'stylus-loader',
+                options: {
+                    'resolve url': true,
+                    import: ['~nib/lib/nib/index.styl'],
+                    preferPathResolver: 'webpack',
+                },
+            },
+        ]
+    },
+];
 
-module.exports = rules
+module.exports = rules;

@@ -1,85 +1,55 @@
-const webpack = require('webpack')
-const config = require('../webpack/constants')
-const path = require('path')
-const autoprefixer = require('autoprefixer')
+const path = require('path');
+const config = require('config');
+const webpack = require('webpack');
+const WebpackChunkHash = require('webpack-chunk-hash');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const WebpackChunkHash = require('webpack-chunk-hash')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const buildNumber = process.env.BUILD_NUMBER || '';
+const BUILD_META_TAG = `<meta build-number="${buildNumber}" build-date="${(new Date()).toLocaleString()}">`;
+const mode = config.get('build.mode');
+const progress = config.get('build.progress');
+const isDevMode = mode === 'development';
 
 const plugins = [
-
     new WebpackChunkHash(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        logger: ['common/utils/logger', 'default']
-    }),
-    new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: JSON.stringify(config.NODE_ENV)
-        },
-        __DEV__: config.IS_DEVELOPMENT,
-        __STYLES__: JSON.stringify(config.app.markupStyle)
-    }),
     new HtmlWebpackPlugin({
-        template: path.join(config.sourcePath, 'index.html'),
-        path: config.buildPath,
-        filename: 'index.html',
-        chunks: ['app', 'common', 'vendor', 'manifest']
+        template: path.join(__dirname, '..', 'src', 'index.ejs'),
+        favicon: path.join(__dirname, '..', 'node_modules', 'markup-common/markup/images/favicon.ico'),
+        templateParameters: {
+            BUILD_META_TAG
+        },
     }),
     new webpack.LoaderOptionsPlugin({
         options: {
-            postcss: [
-                autoprefixer({
-                    browsers: [
-                        'last 3 version',
-                        'ie >= 10'
-                    ]
-                })
-            ],
             stylus: {
+                'resolve url': true,
                 use: [require('nib')()],
                 import: ['~nib/lib/nib/index.styl'],
-                preferPathResolver: 'webpack'
+                preferPathResolver: 'webpack',
             },
-            context: config.sourcePath
-        }
-    })
-]
+        },
+    }),
+    new MiniCssExtractPlugin({
+        filename: isDevMode ? 'css/[name].css' : 'css/[name].css?[contenthash]',
+        chunkFileName: isDevMode ? 'css/[id].css' : 'css/[id].css?[hash]',
+    }),
+];
 
-if (config.IS_PRODUCTION) {
-    // Production plugins
-    plugins.push(
-        new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            debug: false
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                conditionals: true,
-                unused: true,
-                comparisons: true,
-                sequences: true,
-                dead_code: true,
-                evaluate: true,
-                if_return: true,
-                join_vars: true
-            },
-            output: {
-                comments: false
-            }
-        }),
-        new ExtractTextPlugin('[name]-[hash].css'))
+if (path.basename(require.main.filename) === 'webpack-dev-server.js') {
+    plugins.push(new OpenBrowserPlugin({ url: config.get('dev.url') }));
 } else {
-    // Development plugins
-    plugins.push(
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
-    )
+    plugins.push(new CleanWebpackPlugin(config.get('build.buildPath'), {
+        root: __dirname,
+        verbose: false
+    }));
 }
 
-module.exports = plugins
+if (progress) {
+    plugins.push(new SimpleProgressWebpackPlugin({ format: progress }));
+}
+
+module.exports = plugins;

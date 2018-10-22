@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
 
-/**
- * Dump component
- */
-class Counter extends React.Component {
+export class Counter extends React.Component {
     static propTypes = {
         increment: PropTypes.func.isRequired,
         decrement: PropTypes.func.isRequired,
@@ -28,7 +25,6 @@ class Counter extends React.Component {
         );
     }
 
-
     handleIncrement = () => {
         this.props.increment();
     };
@@ -38,5 +34,3 @@ class Counter extends React.Component {
     };
 
 }
-
-export {Counter};

@@ -8,17 +8,17 @@ import PropTypes from "prop-types";
 @connect(mapState, mapDispatch)
 class CounterContainer extends React.Component {
     static propTypes = {
-        incrementAction: PropTypes.func.isRequired,
-        decrementAction: PropTypes.func.isRequired,
+        increment: PropTypes.func,
+        decrement: PropTypes.func,
         number: PropTypes.number,
     };
 
     render() {
-        const {number, incrementAction, decrementAction} = this.props;
+        const {number, increment, decrement} = this.props;
         return (
             <div className="main">
                 <div className="widget_block">
-                    <Counter increment={incrementAction} decrement={decrementAction} number={number}/>
+                    <Counter increment={increment} decrement={decrement} number={number}/>
                 </div>
             </div>
         );
@@ -34,8 +34,8 @@ function mapState(state) {
 function mapDispatch(dispatch) {
     return {
         ...bindActionCreators({
-            incrementAction: increment,
-            decrementAction: decrement,
+            increment,
+            decrement,
         }, dispatch),
     };
 }

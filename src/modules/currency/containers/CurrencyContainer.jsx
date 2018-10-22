@@ -14,7 +14,7 @@ class CurrencyContainer extends React.Component {
         error: PropTypes.string,
         loading: PropTypes.bool,
         pair: PropTypes.string,
-        fetchRate: PropTypes.func.isRequired,
+        fetchRate: PropTypes.func,
     };
 
     render() {
@@ -23,10 +23,10 @@ class CurrencyContainer extends React.Component {
             <div className="main">
                 <div className="widget_block">
                     <CurrencyView loading={loading}
-                                  update={this.handleSelectCurrencyPair}
-                                  pair={pair}
-                                  error={error}
-                                  rate={rate}/>
+                        update={this.handleSelectCurrencyPair}
+                        pair={pair}
+                        error={error}
+                        rate={rate}/>
                 </div>
             </div>
         );

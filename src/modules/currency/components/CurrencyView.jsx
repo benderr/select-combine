@@ -36,10 +36,7 @@ export class CurrencyView extends React.Component {
                 {rate && (
                     <div className="form_group">
                         <div>
-PAIR:
-                            {pair}
-, VALUE:
-                            {rate}
+                            PAIR: {pair}, VALUE: {rate}
                         </div>
                     </div>
                 )}

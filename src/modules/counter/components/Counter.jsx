@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import logo from 'markup-common/markup/images/logo/logo-2.0.svg';
 
 export class Counter extends React.Component {
     static propTypes = {
@@ -23,6 +24,7 @@ export class Counter extends React.Component {
         const { number } = this.props;
         return (
             <div>
+                <img src={logo} alt="logo" />
                 <div className="form-buttons">
                     <span className="info info_success">{number}</span>
                     <button type="button" className="button small" onClick={this.handleIncrement}>+</button>

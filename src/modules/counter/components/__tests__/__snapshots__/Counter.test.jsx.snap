@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="form-buttons"
+  >
+    <span
+      className="info info_success"
+    />
+    <button
+      className="button small"
+      onClick={[Function]}
+    >
+      +
+    </button>
+    <button
+      className="button small"
+      onClick={[Function]}
+    >
+      -
+    </button>
+  </div>
+  <div>
+    <a
+      href="/currency"
+      onClick={[Function]}
+    >
+      Go to currency
+    </a>
+  </div>
+</div>
+`;

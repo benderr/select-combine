@@ -1,98 +1,110 @@
-/* eslint no-console: 0 */
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 class DefaultLayerLayout extends React.Component {
-	static propTypes = {
-		layerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-		onCloseLayer: PropTypes.func.isRequired
-	};
+    static propTypes = {
+        layerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        onCloseLayer: PropTypes.func.isRequired,
+    };
 
-	layerOptions = {
-		ref: el => this.el = el,
-		'data-layer': this.props.layerId
-	};
+    constructor() {
+        super();
+        const { layerId } = this.props;
 
-	addClass(el, className) {
-		el.classList.add(className);//todo возможно потребуется заменить методы если где то не поддерживается
-	}
+        this.layerOptions = {
+            ref: (el) => {
+                this.el = el;
+            },
+            'data-layer': layerId,
+        };
+    }
 
-	removeClass(el, className) {
-		el.classList.remove(className); //todo возможно потребуется заменить методы если где то не поддерживается
-	}
+    componentDidMount() {
+        this.openLayer();
+    }
 
-	getLayerId() {
-		return this.props.layerId;
-	}
+    getElement() {
+        if (!this.el) {
+            //eslint-disable-next-line no-console
+            console.warn('Отсутствует layerOptions в article-элементе слоя');
+            // eslint-disable-next-line react/no-find-dom-node
+            return ReactDOM.findDOMNode(this);
+        }
+        return this.el;
+    }
 
-	closeLayer() {
-		// const el = this.el;
-		// if (el) {
-		// 	this.removeClass(el, 'open');
-		// 	this.addClass(el, 'hide');
-		// }
-		// setTimeout(() => this.props.onCloseLayer({layerId: this.props.layerId}), 400);
-		this.props.onCloseLayer({layerId: this.props.layerId})
-	}
+    getToggleButton() {
+        const { layerId } = this.props;
 
-	toggleFullSize() {
-		const el = this.getElement();
-		const btn = el.querySelector('#page_expand_' + this.props.layerId);
-		if (this.fullSize) {
-			this.removeClass(el, 'fullsize');
-			this.removeClass(btn, 'rotate');
-			this.fullSize = false;
-		}
-		else {
-			this.fullSize = true;
-			this.addClass(btn, 'rotate');
-			this.addClass(el, 'fullsize');
-		}
-		// перестраиваем обучалки
-		return false;
-	}
+        return (
+            <a
+                id={`page_expand_${layerId}`}
+                className="page_expand icon-fullsize"
+                onClick={::this.toggleFullSize}
+            />
+        );
+    }
 
-	openLayer() {
-		const el = this.getElement();
-		el && setTimeout(() => this.addClass(el, 'open'), 100);
-	}
+    getCloseButton() {
+        return (<a className="page_close icon-close" onClick={::this.closeLayer} />);
+    }
 
-	componentDidMount() {
-		this.openLayer();
-	}
+    addClass(el, className) {
+        el.classList.add(className);
+    }
 
-	getCloseButton() {
-		return (<a className="page_close icon-close" onClick={::this.closeLayer}></a>);
-	}
+    removeClass(el, className) {
+        el.classList.remove(className);
+    }
 
-	getToggleButton() {
-		return (<a id={'page_expand_' + this.props.layerId} className="page_expand icon-fullsize"
-			onClick={::this.toggleFullSize}></a>);
-	}
+    closeLayer() {
+        const { onCloseLayer, layerId } = this.props;
+        onCloseLayer({ layerId });
+    }
 
-	getElement() {
-		if (!this.el) {
-			console.warn('Отсутствует layerOptions в article-элементе слоя');
-			return ReactDOM.findDOMNode(this);
-		}
-		return this.el;
-	}
+    toggleFullSize() {
+        const { layerId } = this.props;
+        const el = this.getElement();
+        const btn = el.querySelector(`#page_expand_${layerId}`);
 
-	render() {
-		return (
-			<article className="page" {...this.layerOptions}>
-				<div className="page_header header_height_auto">
-					{this.getCloseButton()}
-					{this.getToggleButton()}
-					<h1>Тестовый слой</h1>
-				</div>
-				<div className="page_content">
-					{this.props.children}
-				</div>
-			</article>
-		);
-	}
+        if (this.fullSize) {
+            this.removeClass(el, 'fullsize');
+            this.removeClass(btn, 'rotate');
+            this.fullSize = false;
+        } else {
+            this.fullSize = true;
+            this.addClass(btn, 'rotate');
+            this.addClass(el, 'fullsize');
+        }
+
+        return false;
+    }
+
+    openLayer() {
+        const el = this.getElement();
+
+        if (el) {
+            setTimeout(() => this.addClass(el, 'open'), 100);
+        }
+    }
+
+    render() {
+        const { children } = this.props;
+
+        return (
+            <article className="page" {...this.layerOptions}>
+                <div className="page_header header_height_auto">
+                    {this.getCloseButton()}
+                    {this.getToggleButton()}
+                    <h1>Тестовый слой</h1>
+                </div>
+                <div className="page_content">
+                    {children}
+                </div>
+            </article>
+        );
+    }
 }
 
 export default DefaultLayerLayout;

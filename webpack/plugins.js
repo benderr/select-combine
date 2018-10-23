@@ -1,3 +1,4 @@
+const nib = require('nib');
 const path = require('path');
 const config = require('config');
 const webpack = require('webpack');
@@ -20,14 +21,14 @@ const plugins = [
         template: path.join(__dirname, '..', 'src', 'index.ejs'),
         favicon: path.join(__dirname, '..', 'node_modules', 'markup-common/markup/images/favicon.ico'),
         templateParameters: {
-            BUILD_META_TAG
+            BUILD_META_TAG,
         },
     }),
     new webpack.LoaderOptionsPlugin({
         options: {
             stylus: {
                 'resolve url': true,
-                use: [require('nib')()],
+                use: [nib()],
                 import: ['~nib/lib/nib/index.styl'],
                 preferPathResolver: 'webpack',
             },
@@ -44,7 +45,7 @@ if (path.basename(require.main.filename) === 'webpack-dev-server.js') {
 } else {
     plugins.push(new CleanWebpackPlugin(config.get('build.buildPath'), {
         root: __dirname,
-        verbose: false
+        verbose: false,
     }));
 }
 

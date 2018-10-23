@@ -4,6 +4,15 @@
     "node": true,
     "es6": true
   },
-  "extends":["eslint:recommended"],
-  "plugins": ["jest"]
+  "extends":["airbnb"],
+  "plugins": ["react", "jest"],
+  "rules": {
+    "eol-last": 0,
+    "func-names": 0,
+    "spaced-comment": 0,
+    "import/prefer-default-export": 0,
+    "class-methods-use-this": 0,
+    "import/no-extraneous-dependencies": 0,
+    "indent": ["error", 4]
+  }
 }

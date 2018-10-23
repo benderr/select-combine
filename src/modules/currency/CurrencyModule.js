@@ -1,7 +1,7 @@
-import {initialState, actionHandlers} from "./reducers";
-import {getRoutes} from "./routes";
-import {ApplicationModule} from "../ApplicationModule";
-import {sagas} from "./sagas";
+import { initialState, actionHandlers } from './reducers';
+import { getRoutes } from './routes';
+import { ApplicationModule } from '../ApplicationModule';
+import { sagas } from './sagas';
 
 class CounterModule extends ApplicationModule {
     /**
@@ -28,7 +28,7 @@ class CounterModule extends ApplicationModule {
     }
 }
 
-export default new CounterModule;
+export default new CounterModule();
 
 // export function getSagas() {
 //     return [

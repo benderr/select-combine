@@ -1,11 +1,18 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {increment, decrement} from "../actions";
-import {Counter} from "../components/Counter";
-import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { decrement, increment } from '../actions';
+import { Counter } from '../components/Counter';
 
-@connect(mapState, mapDispatch)
+@connect(state => ({
+    number: state.counter.number,
+}), dispatch => ({
+    ...bindActionCreators({
+        increment,
+        decrement,
+    }, dispatch),
+}))
 class CounterContainer extends React.Component {
     static propTypes = {
         increment: PropTypes.func,
@@ -14,31 +21,15 @@ class CounterContainer extends React.Component {
     };
 
     render() {
-        const {number, increment, decrement} = this.props;
+        const { number, increment: inc, decrement: dec } = this.props;
         return (
             <div className="main">
                 <div className="widget_block">
-                    <Counter increment={increment} decrement={decrement} number={number}/>
+                    <Counter increment={inc} decrement={dec} number={number} />
                 </div>
             </div>
         );
     }
 }
 
-function mapState(state) {
-    return {
-        number: state.counter.number,
-    };
-}
-
-function mapDispatch(dispatch) {
-    return {
-        ...bindActionCreators({
-            increment,
-            decrement,
-        }, dispatch),
-    };
-}
-
-
-export {CounterContainer};
+export { CounterContainer };

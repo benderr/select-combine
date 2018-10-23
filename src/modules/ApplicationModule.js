@@ -7,6 +7,7 @@ export class ApplicationModule {
      * @param createReducer {Function} redux helper function for create reducer node
      * @return {{}}
      */
+    // eslint-disable-next-line no-unused-vars
     getReducers(createReducer) {
         return {};
     }

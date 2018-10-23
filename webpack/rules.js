@@ -1,5 +1,6 @@
 const config = require('config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const isDevMode = config.get('build.mode') === 'development';
 const babelOptions = require('../babel/setup');
 
@@ -22,7 +23,7 @@ const rules = [
             {
                 loader: 'file-loader',
             },
-        ]
+        ],
     },
     {
         test: /\.(woff|woff2|eot|ttf)$/,
@@ -41,14 +42,14 @@ const rules = [
             isDevMode ? {
                 loader: 'style-loader',
                 options: {
-                    attrs: { 'data-style-loader': true }
-                }
+                    attrs: { 'data-style-loader': true },
+                },
             } : MiniCssExtractPlugin.loader,
             {
                 loader: 'css-loader',
                 options: {
-                    sourceMap: isDevMode
-                }
+                    sourceMap: isDevMode,
+                },
             },
             {
                 loader: 'stylus-loader',
@@ -58,7 +59,7 @@ const rules = [
                     preferPathResolver: 'webpack',
                 },
             },
-        ]
+        ],
     },
 ];
 

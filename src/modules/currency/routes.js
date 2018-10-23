@@ -1,4 +1,4 @@
-import {CurrencyContainer} from "./containers/CurrencyContainer";
+import { CurrencyContainer } from './containers/CurrencyContainer';
 
 export function getRoutes() {
     return {

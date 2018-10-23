@@ -9,7 +9,7 @@ const devServer = {
         all: false,
         colors: true,
         errors: true,
-        warnings: true
+        warnings: true,
     },
     clientLogLevel: 'error',
     noInfo: true,

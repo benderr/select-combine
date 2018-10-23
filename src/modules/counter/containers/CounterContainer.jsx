@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { decrement, increment } from '../actions';
 import { Counter } from '../components/Counter';
+import logo from 'markup-common/markup/images/logo/logo-2.0.svg';
 
 @connect(state => ({
     number: state.counter.number,
@@ -24,6 +25,7 @@ class CounterContainer extends React.Component {
         const { number, increment: inc, decrement: dec } = this.props;
         return (
             <div className="main">
+                <img src={logo} alt="logo" />
                 <div className="widget_block">
                     <Counter increment={inc} decrement={dec} number={number} />
                 </div>

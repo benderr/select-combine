@@ -18,8 +18,8 @@ const isDevMode = mode === 'development';
 const plugins = [
     new WebpackChunkHash(),
     new HtmlWebpackPlugin({
-        template: path.join(__dirname, '..', 'src', 'index.ejs'),
-        favicon: path.join(__dirname, '..', 'node_modules', 'markup-common/markup/images/favicon.ico'),
+        template: path.join(__dirname, '../src/index.ejs'),
+        favicon: path.join(__dirname, '../node_modules/markup-common/markup/images/favicon.ico'),
         templateParameters: {
             BUILD_META_TAG,
         },
@@ -37,6 +37,9 @@ const plugins = [
     new MiniCssExtractPlugin({
         filename: isDevMode ? 'css/[name].css' : 'css/[name].css?[contenthash]',
         chunkFileName: isDevMode ? 'css/[id].css' : 'css/[id].css?[hash]',
+    }),
+    new webpack.ProvidePlugin({
+        babelHelpers: require.resolve('../babel/helpers'),
     }),
 ];
 

@@ -7,13 +7,13 @@ const babelOptions = require('../babel/setup');
 const rules = [
     {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, require.resolve('../babel/helpers')],
         use: [
             {
                 loader: 'babel-loader',
                 options: Object.assign({
                     cacheDirectory: true,
-                }, babelOptions({ jest: true })),
+                }, babelOptions()),
             },
         ],
     },

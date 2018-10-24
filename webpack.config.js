@@ -34,7 +34,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            settings: 'settings',
+            config: path.join(__dirname, 'src/dummy.config'),
         },
         extensions: ['.js', '.jsx'],
         modules: [

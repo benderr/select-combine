@@ -62,7 +62,7 @@ const rules = [
         ],
     },
     {
-        test: /config/,
+        test: /\.config$/,
         use: [
             {
                 loader: 'inject-config-loader',

@@ -4736,10 +4736,9 @@ init-package-json@^1.10.3:
     validate-npm-package-license "^3.0.1"
     validate-npm-package-name "^3.0.0"
 
-inject-config-loader@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/inject-config-loader/-/inject-config-loader-1.0.0.tgz#8a14f406c6b835f0863bf697e1b5626b4fe8bc21"
-  integrity sha512-2nRsBLY0nLy88ykfJGPGfXCQc/J3N4ggMe/O1H0JK853EsKj1+pcPjxBw0Y1A+qXnOl5gwyNsp2pdjV9dWB5yg==
+"inject-config-loader@ssh://git@github.com/tinkerscript/inject-config-loader#v1.0.0":
+  version "0.0.1"
+  resolved "ssh://git@github.com/tinkerscript/inject-config-loader#929827aafc4a84233e8b86323fb0b507f2dc4179"
 
 inquirer@^6.1.0:
   version "6.2.0"

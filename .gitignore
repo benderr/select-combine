@@ -2,19 +2,6 @@ lib
 node_modules
 *.log
 .idea
-
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
-demo/node_modules
-demo/Markup.Common
-demo/Markup.Kassa
-demo/Markup.Portal
-# testing
-demo/coverage
-
-# production
-demo/build
 /build
 
 # misc

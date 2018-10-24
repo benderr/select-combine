@@ -1,25 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-/**
- * Dump component
- */
-class Counter extends React.Component {
+export class Counter extends React.Component {
     static propTypes = {
         increment: PropTypes.func.isRequired,
         decrement: PropTypes.func.isRequired,
         number: PropTypes.number,
     };
 
+    handleIncrement = () => {
+        const { increment } = this.props;
+        increment();
+    };
+
+    handleDecrement = () => {
+        const { decrement } = this.props;
+        decrement();
+    };
+
     render() {
-        const {number} = this.props;
+        const { number } = this.props;
         return (
             <div>
                 <div className="form-buttons">
                     <span className="info info_success">{number}</span>
-                    <button className="button small" onClick={this.handleIncrement}>+</button>
-                    <button className="button small" onClick={this.handleDecrement}>-</button>
+                    <button type="button" className="button small" onClick={this.handleIncrement}>+</button>
+                    <button type="button" className="button small" onClick={this.handleDecrement}>-</button>
                 </div>
                 <div>
                     <Link to="/currency">Go to currency</Link>
@@ -27,16 +34,4 @@ class Counter extends React.Component {
             </div>
         );
     }
-
-
-    handleIncrement = () => {
-        this.props.increment();
-    };
-
-    handleDecrement = () => {
-        this.props.decrement();
-    };
-
 }
-
-export {Counter};

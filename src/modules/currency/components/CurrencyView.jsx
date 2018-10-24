@@ -10,8 +10,15 @@ export class CurrencyView extends React.Component {
         error: PropTypes.string,
     };
 
+    handleUpdate = (e) => {
+        const { update } = this.props;
+        update({ currencyPair: e.target.value });
+    }
+
     render() {
-        const {rate, pair, loading, error} = this.props;
+        const {
+            rate, pair, loading, error,
+        } = this.props;
 
         return (
             <div className="form">
@@ -23,18 +30,17 @@ export class CurrencyView extends React.Component {
                         <option value="USD_RUB">USD_RUB</option>
                     </select>
                 </div>
-                <br/>
+                <br />
                 {error && <span>{error}</span>}
                 {loading && <span>Loading...</span>}
-                {rate && <div className="form_group">
-                    <div>PAIR: {pair}, VALUE: {rate}</div>
-                </div>}
+                {rate && (
+                    <div className="form_group">
+                        <div>
+                            PAIR: {pair}, VALUE: {rate}
+                        </div>
+                    </div>
+                )}
             </div>
         );
-    }
-
-
-    handleUpdate = (e) => {
-        this.props.update({currencyPair: e.target.value});
     }
 }

@@ -1,4 +1,4 @@
-import {all} from "redux-saga/effects";
+import { all } from 'redux-saga/effects';
 
 export const configureSagas = (modules) => {
     const sagas = modules.reduce((list, module) => {

@@ -1,10 +1,10 @@
-import {createBrowserHistory} from 'history'
+import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
-import {configureRoutes} from "./routes";
-import {configureStore} from "./store";
-import {configureMiddlewares} from './middlewares';
-import {configureReducers} from './reducers';
-import {configureSagas} from "./sagas";
+import { configureRoutes } from './routes';
+import { configureStore } from './store';
+import { configureMiddlewares } from './middlewares';
+import { configureReducers } from './reducers';
+import { configureSagas } from './sagas';
 
 /**
  * Configure redux store and middlewares by ApplicationModule array
@@ -12,33 +12,30 @@ import {configureSagas} from "./sagas";
  * @param initState
  * @return {{store: *, routes: *, history: *}}
  */
-export const configureRedux = ({modules, initState}) => {
+export const configureRedux = ({ modules, initState }) => {
     const history = createBrowserHistory();
     const sagaMiddleware = createSagaMiddleware();
     const routes = configureRoutes(modules);
-    //const middleware = getMiddlewares(modules, routerMiddleware(history), sagaMiddleware);
     const middleware = configureMiddlewares(modules, sagaMiddleware);
 
-    const store = configureStore(
-        {
-            middleware: middleware,
-            reducers: configureReducers(modules),
-            initState: initState,
-            history,
-        }
-    );
+    const store = configureStore({
+        middleware,
+        reducers: configureReducers(modules),
+        initState,
+        history,
+    });
 
     function runSagas() {
         const task = sagaMiddleware.run(configureSagas(modules));
-        task.done.catch(error => {
+        task.done.catch((error) => {
+            // eslint-disable-next-line no-console
             console.error(error);
-            //logger.error('Ошибка в saga', error);
             runSagas();
-            store.dispatch({type: '@@core/GLOBAL_SAGA_ERROR', error});
+            store.dispatch({ type: '@@core/GLOBAL_SAGA_ERROR', error });
         });
     }
 
     runSagas();
 
-    return {store, routes, history};
+    return { store, routes, history };
 };

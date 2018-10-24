@@ -1,42 +1,50 @@
-/*eslint-disable*/
-const webpack = require('webpack');
-const config = require('./webpack/constants')
-const plugins = require('./webpack/plugins')
-const rules = require('./webpack/rules')
-const devServer = require('./webpack/devServer')
+const path = require('path');
+const config = require('config');
+const plugins = require('./webpack/plugins');
+const rules = require('./webpack/rules');
+const devServer = require('./webpack/devServer');
 
-const buildEntryPoint = (point) => {
-    if (config.IS_PRODUCTION) { return point }
-    return [point, 'webpack/hot/only-dev-server', `webpack-dev-server/client?http://${config.app.host}:${config.app.port}`]
-}
+const mode = config.get('build.mode');
 
 module.exports = {
-    devtool: config.IS_PRODUCTION ? 'source-map' : 'eval-source-map',
-    context: config.jsSourcePath,
-    entry: {app: buildEntryPoint('./index')},
+    mode,
+    devtool: config.get('build.sourceMaps'),
+    entry: {
+        main: path.join(__dirname, 'src'),
+    },
     output: {
-        path: config.buildPath,
+        path: path.join(__dirname, config.get('build.buildPath')),
         publicPath: '/',
-        filename: '[name]-[hash].js'
+        filename: 'js/[name].js?[hash]',
     },
-    module: {
-        rules
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /node_modules/,
+                    name: 'vendor',
+                    priority: 10,
+                    enforce: true,
+                },
+            },
+        },
     },
-    externals: {
-        jsdom: 'window',
-        'react/addons': true,
-        'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': 'window',
-        'react-dom/test-utils': true,
-        'react-test-renderer/shallow': true
+    performance: {
+        hints: false,
     },
     resolve: {
-        extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx', '.svg', '.ttf', '.woff', '.woff2'],
+        alias: {
+            config: path.join(__dirname, 'src/dummy.config'),
+        },
+        extensions: ['.js', '.jsx'],
         modules: [
-            config.nodeModules,
-            config.jsSourcePath
-        ]
+            path.join(__dirname, 'node_modules'),
+        ],
+    },
+    module: {
+        rules,
     },
     plugins,
-    devServer
+    stats: devServer.stats,
+    devServer,
 };

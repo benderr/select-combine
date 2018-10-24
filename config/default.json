@@ -9,5 +9,7 @@
     "port": 2210,
     "url": "http://localhost:2210"
   },
-  "front": {}
+  "front": {
+    "version": "alfa"
+  }
 }

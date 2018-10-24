@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import logo from 'markup-common/markup/images/logo/logo-2.0.svg';
 import { decrement, increment } from '../actions';
 import { Counter } from '../components/Counter';
-import logo from 'markup-common/markup/images/logo/logo-2.0.svg';
 
 @connect(state => ({
     number: state.counter.number,

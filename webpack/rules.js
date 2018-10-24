@@ -61,6 +61,17 @@ const rules = [
             },
         ],
     },
+    {
+        test: /config/,
+        use: [
+            {
+                loader: 'inject-config-loader',
+                options: {
+                    field: 'front',
+                },
+            },
+        ],
+    },
 ];
 
 module.exports = rules;

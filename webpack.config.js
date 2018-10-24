@@ -33,6 +33,9 @@ module.exports = {
         hints: false,
     },
     resolve: {
+        alias: {
+            settings: 'settings',
+        },
         extensions: ['.js', '.jsx'],
         modules: [
             path.join(__dirname, 'node_modules'),

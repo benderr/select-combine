@@ -74,7 +74,7 @@
     "inject-config-loader": "ssh://git@github.com/tinkerscript/inject-config-loader#v1.0.0",
     "jest": "23.6.0",
     "mini-css-extract-plugin": "0.4.4",
-    "modul-front-dev-tools": "ssh://git@github.com/brcportal2/modul-front-dev-tools#v1.0.2",
+    "modul-front-dev-tools": "ssh://git@github.com/brcportal2/modul-front-dev-tools#v1.0.3",
     "nib": "1.1.2",
     "open-browser-webpack-plugin": "0.0.5",
     "postcss-loader": "3.0.0",

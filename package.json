@@ -12,11 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/benderr/select-combine.git"
+    "url": "git+https://github.com/brcportal2/front-boilerplate"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/benderr/select-combine#readme",
+  "homepage": "https://github.com/brcportal2/front-boilerplate",
   "dependencies": {
     "@babel/polyfill": "7.0.0",
     "axios": "0.18.0",

@@ -1,4 +1,6 @@
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { hot } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import ModulRouter from 'modul-ui-router';
 import { Router } from 'react-router-dom';
@@ -12,7 +14,7 @@ import CurrencyModule from './modules/currency/CurrencyModule';
 const modules = [CounterModule, CurrencyModule];
 const { store, routes, history } = configureRedux({ modules, initState: {} });
 
-export const App = () => (
+export const App = hot(module)(() => (
     <Provider store={store}>
         <Router history={history}>
             <ModulRouter
@@ -23,4 +25,4 @@ export const App = () => (
             />
         </Router>
     </Provider>
-);
+));

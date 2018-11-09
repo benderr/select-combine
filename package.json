@@ -6,7 +6,7 @@
   "module": "./src",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot --inline",
     "test": "jest --config jest/jest.config.js",
     "lint": "eslint . --ext js --ext jsx"
   },
@@ -78,6 +78,7 @@
     "nib": "1.1.2",
     "open-browser-webpack-plugin": "0.0.5",
     "postcss-loader": "3.0.0",
+    "react-hot-loader": "4.3.12",
     "react-test-renderer": "16.5.2",
     "regenerator-runtime": "0.12.1",
     "simple-progress-webpack-plugin": "1.1.2",

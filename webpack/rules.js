@@ -2,7 +2,7 @@ const config = require('config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isDevMode = config.get('build.mode') === 'development';
-const babelOptions = require('../babel/setup');
+const babelOptions = require('../babel/setup')({ dev: isDevMode });
 
 const rules = [
     {
@@ -13,7 +13,7 @@ const rules = [
                 loader: 'babel-loader',
                 options: Object.assign({
                     cacheDirectory: true,
-                }, babelOptions()),
+                }, babelOptions),
             },
         ],
     },

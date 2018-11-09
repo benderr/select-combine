@@ -1,4 +1,4 @@
-module.exports = ({ jest } = {}) => {
+module.exports = ({ jest, dev } = {}) => {
     const plugins = [
         ['@babel/plugin-proposal-class-properties', { loose: false }],
         ['@babel/plugin-proposal-decorators', { legacy: true }],
@@ -38,6 +38,10 @@ module.exports = ({ jest } = {}) => {
 
     if (!jest) {
         plugins.push('@babel/external-helpers');
+    }
+
+    if (dev) {
+        plugins.push('react-hot-loader/babel');
     }
 
     return {

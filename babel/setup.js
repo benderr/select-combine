@@ -1,7 +1,7 @@
 module.exports = ({ jest, dev } = {}) => {
     const plugins = [
-        ['@babel/plugin-proposal-class-properties', { loose: false }],
         ['@babel/plugin-proposal-decorators', { legacy: true }],
+        ['@babel/plugin-proposal-class-properties', { loose: false }],
         '@babel/plugin-proposal-do-expressions',
         '@babel/plugin-proposal-export-default-from',
         '@babel/plugin-proposal-export-namespace-from',
@@ -16,6 +16,7 @@ module.exports = ({ jest, dev } = {}) => {
         '@babel/plugin-proposal-throw-expressions',
         '@babel/plugin-syntax-dynamic-import',
         '@babel/plugin-syntax-import-meta',
+        '@babel/plugin-transform-runtime',
     ];
 
     const presets = [

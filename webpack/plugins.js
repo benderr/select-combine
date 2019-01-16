@@ -19,7 +19,7 @@ const plugins = [
     new WebpackChunkHash(),
     new HtmlWebpackPlugin({
         template: path.join(__dirname, '../src/index.ejs'),
-        favicon: path.join(__dirname, '../node_modules/markup-common/markup/images/favicon.ico'),
+        favicon: path.join(__dirname, '../node_modules/modul.markup.ui-kit/markup/images/favicon.ico'),
         templateParameters: {
             BUILD_META_TAG,
         },

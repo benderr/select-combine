@@ -1,6 +1,5 @@
 import '@babel/polyfill';
-import 'markup-common/markup/stylus/buttons.styl';
-import 'markup-common/markup/stylus/blocks.styl';
+import './markup/stylus/style.styl';
 import React from 'react';
 import { render } from 'react-dom';
 import { App } from './App';

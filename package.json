@@ -25,7 +25,7 @@
     "history": "4.7.2",
     "jquery": "3.3.1",
     "modul-ui-router": "0.0.8",
-    "modul.markup.ui-kit": "git+ssh://git@github.com/brcportal2/Markup.Common.git#rc",
+    "modul.markup.ui-kit": "git+ssh://git@github.com/brcportal2/Markup.Common.git#v1.0.2",
     "prop-types": "15.6.2",
     "react": "16.7.0",
     "react-dom": "16.7.0",

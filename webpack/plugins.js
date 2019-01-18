@@ -47,7 +47,7 @@ if (path.basename(require.main.filename) === 'webpack-dev-server.js') {
     plugins.push(new OpenBrowserPlugin({ url: config.get('dev.url') }));
 } else {
     plugins.push(new CleanWebpackPlugin(config.get('build.buildPath'), {
-        root: __dirname,
+        root: path.join(__dirname, '..'),
         verbose: false,
     }));
 }

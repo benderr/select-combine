@@ -48,9 +48,6 @@ const rules = [
         use: [
             isDevMode ? {
                 loader: 'style-loader',
-                options: {
-                    attrs: { 'data-style-loader': true },
-                },
             } : MiniCssExtractPlugin.loader,
             {
                 loader: 'css-loader',

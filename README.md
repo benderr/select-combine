@@ -6,3 +6,5 @@
 - Сборка: [webpack@4](https://github.com/webpack/webpack)
 - Конфигурирование: [config@3](https://github.com/lorenwest/node-config)
 - Тесты: [jest](https://jestjs.io/)
+
+Пакет modul.markup.ui-kit подключается через ssh, так что для работы следует настроить [авторизацию в GitHub по ssh](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).

@@ -1,8 +1,11 @@
+const path = require('path');
 const config = require('config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isDevMode = config.get('build.mode') === 'development';
 const babelOptions = require('../babel/setup')({ dev: isDevMode });
+
+const images = path.join(__dirname, '../node_modules/modul.markup.ui-kit/markup/images');
 
 const rules = [
     {
@@ -22,6 +25,10 @@ const rules = [
         use: [
             {
                 loader: 'file-loader',
+                options: {
+                    name: 'images/[path][name].[ext]?[hash:hex:7]',
+                    context: images,
+                },
             },
         ],
     },
